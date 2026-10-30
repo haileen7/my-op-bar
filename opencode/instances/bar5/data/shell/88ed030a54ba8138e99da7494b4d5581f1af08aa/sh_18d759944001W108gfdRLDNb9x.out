@@ -1,0 +1,58 @@
+waitForTimeout: 70
+specs: 52
+--- mutation job ---
+name: Tests
+
+on:
+  pull_request:
+    branches: [main, beta, test]
+  # The `mutation` job below runs on PRs too (re-enabled 2026-10-25,
+  # reversing the manual-only gate from #1012): it runs in parallel under
+  # E2E's ~30-minute shadow and gates nothing (`continue-on-error: true`).
+  # A manual run executes every job, so read the mutation job's own result,
+  # not the run's overall conclusion.
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+6:  # The `mutation` job below runs on PRs too (re-enabled 2026-10-25,
+7-  # reversing the manual-only gate from #1012): it runs in parallel under
+8-  # E2E's ~30-minute shadow and gates nothing (`continue-on-error: true`).
+9:  # A manual run executes every job, so read the mutation job's own result,
+10-  # not the run's overall conclusion.
+11-  workflow_dispatch:
+12-
+13-concurrency:
+14-  group: ${{ github.workflow }}-${{ github.ref }}
+15-  cancel-in-progress: true
+16-
+17-jobs:
+18-  lint:
+19-    name: Code Style (Pint)
+20-    runs-on: ubuntu-latest
+21-    timeout-minutes: 5
+--
+142:      # mutations appear to fail). CI always starts from a fresh checkout,
+143-      # but keep this guard so the same trap can never fire here either.
+144-      - name: Clear cached config/routes before tests
+145-        run: |
+146-          php artisan config:clear --env=testing
+147-          php artisan route:clear --env=testing
+148-          php artisan view:clear
+149-
+150-      - name: Run tests with coverage
+151-        # `set -o pipefail` is LOAD-BEARING. GitHub Actions runs `run:` blocks
+152-        # with `bash -e`, which has no pipefail, so `pest … | tee` would hand
+153-        # back tee's exit status and report GREEN on a red suite — the exact
+154-        # "a failing job that reads as a pass" trap issue #935 is about.
+--
+451:  mutation:
+452-    name: Mutation Testing
+453-    # Runs on every PR (re-enabled 2026-10-25, reversing the manual-only
+454-    # gate from #1012): each run is expensive (checkout, composer install
+455-    # and migrations before the single `pest --mutate` line below, ~30
+456-    # minutes as of 2026-10-28), but it runs in parallel with E2E and
+457-    # gates nothing (`continue-on-error: true`), so it adds no wall time.
+458-    # Cap 45 minutes (raised from 30 on 2026-10-28 after the job hit the
+459-    # 30-minute timeout on #1270 and #1271).

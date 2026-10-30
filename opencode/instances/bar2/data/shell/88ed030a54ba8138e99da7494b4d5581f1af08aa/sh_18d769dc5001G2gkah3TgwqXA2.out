@@ -1,0 +1,12 @@
+18:| Node + npm | Node 20+ (builds Vite assets only) |
+--- README node ---
+36:**Prerequisites:** Docker, PHP 8.5, Composer, Node.js 24+
+111:پیش‌نیاز: Docker، PHP 8.5، Composer، Node.js 24+
+--- vendor cache per job ---
+34: lint:         uses: actions/cache@v5
+104: test:         uses: actions/cache@v5
+348: e2e:         uses: actions/cache@v5
+416: e2e:         uses: actions/cache@v5
+501: mutation:         uses: actions/cache@v5
+560: phpstan:         uses: actions/cache@v5
+625: test-php86:         uses: actions/cache@v5

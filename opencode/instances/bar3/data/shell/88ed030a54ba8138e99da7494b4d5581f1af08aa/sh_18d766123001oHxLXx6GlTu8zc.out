@@ -1,0 +1,29 @@
+app/Traits/TicketsInboxFlow.php:560:                    $ticket->attachments()->create([
+resources/views/livewire/tickets/⚡create.blade.php:229:                $ticket->attachments()->create([
+--- inbox submitAction files ---
+            $newActivity = $ticket->activities()->create([
+                'user_id' => auth()->id(),
+                'action' => $actionType,
+                'description' => $description,
+                'to_unit_id' => $this->targetUnitId ?? $ticket->unit_id,
+            ]);
+
+            if ($this->completionFiles) {
+                foreach ($this->completionFiles as $file) {
+                    $path = $file->store('attachments', 'public');
+                    $ticket->attachments()->create([
+                        'user_id' => auth()->id(),
+                        'activity_id' => $newActivity->id,
+                        'file_path' => $path,
+                        'file_name' => $file->getClientOriginalName(),
+                        'file_size' => $file->getSize(),
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            // #1176: `showingTicket` became a computed — resetting it meant
+            // writing to a computed and blowing up. The id reset covers the
+            // state; the unset drops the stale per-request model cache so any
+            // read in the same request re-derives (and finds nothing).

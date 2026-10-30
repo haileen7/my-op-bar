@@ -1,0 +1,21 @@
+          extensions: pgsql, redis, pcntl, bcmath, zip, curl, mbstring
+          coverage: none
+          tools: composer:latest
+
+      - name: Cache Composer packages
+        uses: actions/cache@v5
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install dependencies
+        # The lock predates PHP 8.6: three packages cap php at 8.5 — nette/schema
+        # and nette/utils (both on the production path, via league/commonmark) plus
+        # brianium/paratest (dev) — so a plain install cannot even resolve on 8.6,
+        # with or without dev dependencies. The preview installs the locked packages
+        # anyway — surfacing real 8.6 behaviour is the job's whole point. This flag
+        # exists ONLY in this job; it carries production weight, not just tooling.
+        run: composer install --prefer-dist --no-interaction --no-progress --ignore-platform-req=php
+
+      # Issue #1185: no Node, no Vite build. `Tests\TestCase::setUp()` calls
