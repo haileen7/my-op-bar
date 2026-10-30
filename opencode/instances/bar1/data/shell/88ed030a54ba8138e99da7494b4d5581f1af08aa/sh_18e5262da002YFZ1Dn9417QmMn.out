@@ -1,0 +1,14 @@
+/home/runner/.cache/opencode/:
+bin
+npm
+
+/home/runner/.config/opencode/:
+AGENTS.md
+agents
+oh-my-opencode-slim.json
+opencode.json
+plugins
+service.json
+skills
+---
+/home/runner/.cache/opencode/npm/@dietrichgebert/ponytail@latest
