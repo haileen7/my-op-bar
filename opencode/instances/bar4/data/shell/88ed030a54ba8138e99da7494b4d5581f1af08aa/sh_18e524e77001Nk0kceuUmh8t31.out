@@ -1,0 +1,12 @@
+No plugins found
+--- config ---
+{
+  "plugins": [
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "oh-my-opencode-slim",
+    "@dietrichgebert/ponytail"
+  ],
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ]
+}

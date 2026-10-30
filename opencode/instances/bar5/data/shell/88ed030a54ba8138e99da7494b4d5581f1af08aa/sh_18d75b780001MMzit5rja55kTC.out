@@ -1,0 +1,71 @@
+            $unitColumn = $this->reportType === 'persons' ? 'u_id' : 'unit_id';
+            $query->whereIn($unitColumn, $descendantIds);
+        }
+
+        // فیلتر وضعیت — نوع‌آگاه (#915): هر گزینه و predicate‌اش در
+        // STATUS_OPTIONS کنار هم زندگی می‌کنند؛ todos ستون status ندارد و
+        // روی is_completed/end_at نگاشت می‌شود.
+        $this->applyStatusFilter($query);
+
+        $total = $query->count();
+
+        // Issue #736: materialise every day in the chosen range, zeros included,
+        // so a day with no rows is a zero rather than a missing column. The
+        // filtered $query is reused, so unit/status/date filters still apply.
+        $range = $this->dateRange();
+        $byDay = $range
+            ? array_map(
+                fn (array $row) => [
+                    'day' => Jalalian::fromCarbon(Carbon::parse($row['day']))->format('Y/m/d'),
+                    'count' => $row['count'],
+                ],
+                DailySeries::between($range[0], $range[1])->counts($query->clone(), 'created_at')
+            )
+            : [];
+
+        $unitColumn = $this->reportType === 'persons' ? 'u_id' : 'unit_id';
+        $byUnit = $query->clone()
+            ->selectRaw("$unitColumn, count(*) as count")
+            ->groupBy($unitColumn)
+            ->with('unit:id,name')
+            ->get()
+            ->mapWithKeys(fn ($item) => [$item->unit?->name ?? 'نامشخص' => $item->count])
+            ->toArray();
+
+        $details = [];
+        if ($this->reportType === 'tickets') {
+            $details = [
+                'urgent' => (clone $query)->where('priority', 'urgent')->count(),
+                'normal' => (clone $query)->where('priority', 'normal')->count(),
+                'low' => (clone $query)->where('priority', 'low')->count(),
+                'overdue' => (clone $query)
+                    ->whereIn('status', ['created', 'forwarded'])
+                    ->where('deadline', '<', now())
+                    ->count(),
+            ];
+        } elseif ($this->reportType === 'persons') {
+            $details = [
+                'byEstekhdam' => Person::selectRaw('COALESCE(estekhdams.name, ?) as name, COUNT(*) as count', ['نامشخص'])
+                    ->leftJoin('estekhdams', 'persons.e_id', '=', 'estekhdams.id')
+                    ->whereIn('persons.u_id', $accessibleIds)
+                    ->when($unitId, fn ($q) => $q->whereIn('persons.u_id', $descendantIds))
+                    ->groupBy('name')
+                    ->pluck('count', 'name')
+                    ->toArray(),
+                'byTahsil' => Person::selectRaw('COALESCE(tahsils.name, ?) as name, COUNT(*) as count', ['نامشخص'])
+                    ->leftJoin('tahsils', 'persons.t_id', '=', 'tahsils.id')
+                    ->whereIn('persons.u_id', $accessibleIds)
+                    ->when($unitId, fn ($q) => $q->whereIn('persons.u_id', $descendantIds))
+                    ->groupBy('name')
+                    ->pluck('count', 'name')
+                    ->toArray(),
+                'bySemat' => Person::selectRaw('COALESCE(semats.name, ?) as name, COUNT(*) as count', ['نامشخص'])
+                    ->leftJoin('semats', 'persons.s_id', '=', 'semats.id')
+                    ->whereIn('persons.u_id', $accessibleIds)
+                    ->when($unitId, fn ($q) => $q->whereIn('persons.u_id', $descendantIds))
+                    ->groupBy('name')
+                    ->pluck('count', 'name')
+                    ->toArray(),
+            ];
+        }
+

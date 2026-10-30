@@ -1,0 +1,16 @@
+2025_12_25_000001_create_todos_table.php
+2026_07_30_000001_add_composite_indexes_to_todos_table.php
+2026_08_02_234519_add_user_id_to_todos_table.php
+2026_08_29_000002_add_recurrence_fields_to_todos_table.php
+2026_10_08_000001_add_trgm_indexes_to_tickets_and_todos_search.php
+---
+database/migrations/2026_08_02_234519_add_user_id_to_todos_table.php:15:            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+database/migrations/2026_08_02_234519_add_user_id_to_todos_table.php:16:            $table->index('user_id');
+database/migrations/2026_08_02_234519_add_user_id_to_todos_table.php:26:            $table->dropForeign(['user_id']);
+database/migrations/2026_08_02_234519_add_user_id_to_todos_table.php:27:            $table->dropIndex(['user_id']);
+database/migrations/2026_08_02_234519_add_user_id_to_todos_table.php:28:            $table->dropColumn('user_id');
+--- todo views ---
+resources/views/components/help/content/todos.blade.php
+resources/views/livewire/todo
+resources/views/livewire/todo/todo.blade.php
+resources/views/livewire/reports/todos.blade.php

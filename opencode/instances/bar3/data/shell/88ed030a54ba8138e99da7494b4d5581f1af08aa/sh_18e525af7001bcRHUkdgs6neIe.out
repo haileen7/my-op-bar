@@ -1,0 +1,5 @@
+ID                       VERSION  SOURCE
+codebase-memory-augment  local    /home/runner/.config/opencode/plugins/cbm-augment.ts
+oh-my-opencode-slim      3.0.6    oh-my-opencode-slim
+ponytail                 5.3.3    @dietrichgebert/ponytail
+superpowers              2ce8aa1  superpowers@git+https://github.com/obra/superpowers.git

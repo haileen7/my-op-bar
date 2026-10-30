@@ -1,0 +1,4 @@
+app/Jobs/CleanNotificationsJob.php
+36:     * @param  array<int>  $unitIds  آی‌دی واحدها؛ خالی یعنی سراسری (`allUnitIds()`)
+50:        $unitIds = $this->unitIds ?: app(AccessService::class)->allUnitIds();
+52:        $userIds = User::whereHas('person', fn ($q) => $q->whereIn('u_id', $unitIds))

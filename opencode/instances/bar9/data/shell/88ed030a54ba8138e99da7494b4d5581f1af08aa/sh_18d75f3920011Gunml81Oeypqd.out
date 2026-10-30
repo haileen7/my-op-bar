@@ -1,0 +1,14 @@
+17:            $table->unsignedBigInteger('unit_id')->nullable();
+20:            $table->foreign('unit_id', 'todos_unit_fk')
+--- maintenance dedupe ---
+57:            // batch. Each schedule runs in its own transaction; a failure
+61:                $made = DB::transaction(fn () => $this->processSchedule($schedule));
+--- advanced scope ---
+14:        $accessibleIds = app(AccessService::class)->accessibleUnitIds();
+17:            'tickets' => Ticket::whereIn('unit_id', $accessibleIds),
+18:            'todos' => Todo::whereIn('unit_id', $accessibleIds),
+19:            'persons' => Person::whereIn('u_id', $accessibleIds),
+20:            default => Ticket::whereIn('unit_id', $accessibleIds),
+34:            $descendantIds = Unit::descendantIds($unitId)->toArray();
+35:            $descendantIds[] = $unitId;
+37:            $query->whereIn($unitColumn, $descendantIds);

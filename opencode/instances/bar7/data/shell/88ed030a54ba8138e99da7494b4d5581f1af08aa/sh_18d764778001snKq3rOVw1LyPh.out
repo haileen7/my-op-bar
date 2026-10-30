@@ -1,0 +1,11 @@
+168:        $ticket = Ticket::create([
+193:            $todo = Todo::create([
+200:            $ticket->update(['task_id' => $todo->id]);
+204:        \App\Services\ActivityLogService::created(
+210:        \App\Services\NotificationService::notifyUnit(
+218:        $initialActivity = $ticket->activities()->create([
+228:                $path = $file->store('attachments', 'public');
+229:                $ticket->attachments()->create([
+--- policies ---
+TicketCommentPolicy.php
+--- Ticket scope ---
