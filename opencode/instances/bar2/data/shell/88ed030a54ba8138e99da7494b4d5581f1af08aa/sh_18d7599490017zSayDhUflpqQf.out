@@ -1,0 +1,24 @@
+284-        uses: actions/setup-node@v7
+285-        with:
+286-          node-version: '24'
+287:          cache: 'npm'
+288-
+289-      - name: Install dependencies
+290-        # `npm ci` also proves package-lock.json and package.json agree — the
+291-        # lock step of the #1069 plan (typescript + @types/node are new).
+292-        run: npm ci
+293-
+--
+359-        uses: actions/setup-node@v7
+360-        with:
+361-          node-version: '24'
+362:          cache: 'npm'
+363-
+364-      - name: Build frontend assets
+365-        run: |
+366-          npm ci
+367-          npm run build
+368-
+--- node ---
+.github/workflows/test.yml:286:          node-version: '24'
+.github/workflows/test.yml:361:          node-version: '24'
