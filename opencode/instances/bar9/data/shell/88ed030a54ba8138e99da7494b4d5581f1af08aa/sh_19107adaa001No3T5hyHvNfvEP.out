@@ -1,8 +1,0 @@
- app/Observers/HardwareAuditObserver.php | 23 +++++++++++++++--------
- 1 file changed, 15 insertions(+), 8 deletions(-)
----
-name     : laravel/framework
-descrip. : The Laravel Framework.
-keywords : framework, laravel
----
-v13.35.0

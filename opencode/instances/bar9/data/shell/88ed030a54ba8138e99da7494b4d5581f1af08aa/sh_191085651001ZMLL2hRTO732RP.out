@@ -1,6 +1,0 @@
-53a5d179 fix(hardware-audit): write the audit row only after a successful UPDATE (#1279)
-ef517363 fix(todos): make recurring generation transactional and idempotent (#1278)
-8ec977fb chore(#1251): prune 26 PHPStan baseline entries and dead code
-7d43d83a feat(#1246): register the disease pages and their menu entry
-8e692661 feat(#1243): add patient registry with inline create
-5b9b9fe3 test(#1242): smoke-test catalogue persistence and sync phpstan count
