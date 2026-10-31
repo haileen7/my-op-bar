@@ -1,0 +1,11 @@
+
+real	0m14.116s
+user	0m45.905s
+sys	0m2.773s
+exit=1
+Do not use assert() or inline @var PHPDoc tag to override PHPStan's inferred type.
+Do not add type casts just to silence errors.
+Do not widen parameter or return types just to make the error go away.
+/home/runner/h-dashboard/app/Observers/HardwareAuditObserver.php:?:Ignored error pattern #^Left side of && is always true\.$# (booleanAnd.leftAlwaysTrue) in path /home/runner/h-dashboard/app/Observers/HardwareAuditObserver.php was not matched in reported errors. [identifier=ignore.unmatched]
+/home/runner/h-dashboard/database/seeders/CenterBoundarySeeder.php:?:Ignored error pattern #^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$# (nullsafe.neverNull) in path /home/runner/h-dashboard/database/seeders/CenterBoundarySeeder.php was not matched in reported errors. [identifier=ignore.unmatched]
+/home/runner/h-dashboard/database/seeders/HardwareHistorySeeder.php:?:Ignored error pattern #^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$# (nullsafe.neverNull) in path /home/runner/h-dashboard/database/seeders/HardwareHistorySeeder.php was not matched in reported errors. [identifier=ignore.unmatched]

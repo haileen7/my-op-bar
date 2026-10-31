@@ -1,0 +1,13 @@
+38:            if ($value !== null && $value !== '') {
+135:        if ($route && $route->getName() === 'hardware.import') {
+139:        if ($route && str_starts_with($route->uri(), 'api/')) {
+---
+database/seeders/CenterBoundarySeeder.php:139:        $this->command?->info('Created '.count($boundaries).' boundaries for center units.');
+database/seeders/HardwareHistorySeeder.php:57:        $this->command?->info('Seeding hardware audit history for '.count($records).' devices...');
+database/seeders/HardwareHistorySeeder.php:108:        $this->command?->info("Hardware history seeded: {$inserted} new audit entries".($skipped ? ", {$skipped} devices skipped (not found)." : '.'));
+---
+1791-		-
+1792-			message: '#^Left side of && is always true\.$#'
+1793:			identifier: booleanAnd.leftAlwaysTrue
+1794-			count: 2
+1795-			path: app/Observers/HardwareAuditObserver.php

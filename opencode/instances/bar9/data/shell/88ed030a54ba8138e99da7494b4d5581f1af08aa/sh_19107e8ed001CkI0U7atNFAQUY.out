@@ -1,0 +1,14 @@
+excludePaths:
+	analyseAndScan:
+		- /home/runner/h-dashboard/vendor
+		- /home/runner/h-dashboard/node_modules-absent-1301
+
+== plain on 2.3.0 ==
+Invalid entry in excludePaths:
+Path "/home/runner/h-dashboard/node_modules-absent-1301" is neither a directory, nor a file path, nor a fnmatch pattern.
+
+If the excluded path can sometimes exist, append (?)
+to its config entry to mark it as optional. Example:
+
+parameters:
+	excludePaths:

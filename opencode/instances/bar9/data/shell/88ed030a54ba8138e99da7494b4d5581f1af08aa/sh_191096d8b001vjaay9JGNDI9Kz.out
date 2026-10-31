@@ -1,0 +1,7 @@
+Note: Using configuration file /home/runner/h-dashboard/phpstan.neon.
+/home/runner/h-dashboard/app/Console/Commands/ArchiveOldRecords.php
+/home/runner/h-dashboard/app/Console/Commands/GenerateDailyReports.php
+/home/runner/h-dashboard/app/Console/Commands/GenerateDueMaintenance.php
+362
+0
+362

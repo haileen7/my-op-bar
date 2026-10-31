@@ -1,0 +1,6 @@
+exit=1
+362
+DEBUG_OUTPUT_IDENTICAL
+dba19631f1675dab1e7b7864ab985dcbbc2ae15add80858afe4f97023b1715c6  phpstan.neon
+ M composer.lock
+ M package-lock.json

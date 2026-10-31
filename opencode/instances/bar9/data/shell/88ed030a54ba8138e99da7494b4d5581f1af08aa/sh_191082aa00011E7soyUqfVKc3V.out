@@ -1,0 +1,9 @@
+./composer.json:81:        "phpstan": "phpstan analyse --no-progress",
+./composer.json:82:        "phpstan-baseline": "phpstan analyse --generate-baseline",
+./AGENTS.md:105:composer phpstan      # phpstan analyse --no-progress
+./AGENTS.md:106:composer phpstan-baseline  # phpstan analyse --generate-baseline
+./scripts/verify.sh:108:if ! vendor/bin/phpstan analyse --no-progress; then
+./.github/workflows/test.yml:577:        run: vendor/bin/phpstan analyse --no-progress
+./tests/Feature/VerifyWrapperScriptTest.php:125:        $this->assertStringContainsString('phpstan analyse', $calls);
+./tests/Feature/GitHooksTest.php:92:        $this->assertStringContainsString('phpstan analyse', $commands);
+./tests/Feature/GitHooksTest.php:93:        $this->assertStringNotContainsString('phpstan analyse $', $commands);

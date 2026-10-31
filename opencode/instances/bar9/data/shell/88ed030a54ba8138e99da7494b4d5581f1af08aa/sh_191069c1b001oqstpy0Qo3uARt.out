@@ -1,0 +1,49 @@
+  phpstan:
+    name: PHPStan Static Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: pgsql, redis, pcntl, bcmath, zip, curl, mbstring
+          tools: composer:latest
+
+      - name: Cache Composer download cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/composer/files
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            composer-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Assert the lock is present and current
+        run: |
+          test -f composer.lock
+          composer validate --strict --check-lock
+          git diff --exit-code -- composer.lock
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse --no-progress
+
+  test-php86:
+    name: PHP 8.6 Preview (non-blocking)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Informational only: PHP 8.6 is pre-release (RC3 2026-10-08, GA 2026-11-19).
+    # Same precedent as the mutation job — never blocks a merge; it surfaces
+    # 8.6 incompatibilities and deprecations while there is still time to fix them.
+--- gitignore ---
+2:/node_modules
+5:/public/storage
+6:/storage/debugbar
+7:/storage/pail
+25:/storage
