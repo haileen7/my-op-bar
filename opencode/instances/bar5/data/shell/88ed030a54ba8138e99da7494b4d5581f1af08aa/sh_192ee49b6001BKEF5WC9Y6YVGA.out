@@ -1,0 +1,13 @@
+1793466444398
+--- pkg version ---
+node:internal/modules/cjs/loader:1433
+  throw err;
+  ^
+--- plugin errors in log ---
+timestamp=2026-10-31T17:07:24.176Z level=INFO run=bbf92d18 message="cli starting" version=2.2.5 channel=latest local=false args="[\"plugin\",\"add\",\"@dietrichgebert/ponytail\"]" role=cli
+timestamp=2026-10-31T17:07:24.113Z level=INFO run=b5f69838 message="spawning process" command=/bin/bash args="[\"-c\",\"cd /home/runner/h-dashboard && opencode plugin add @dietrichgebert/ponytail 2>&1 | tail -30\"]" cwd=/home/runner/h-dashboard http.span=65904 role=server
+timestamp=2026-10-31T17:07:24.738Z level=INFO run=b5f69838 msg="loading plugin" id=@dietrichgebert/ponytail entrypoint=file:///home/runner/.cache/opencode/npm/@dietrichgebert/ponytail@latest/1793466444398/node_modules/@dietrichgebert/ponytail/.opencode/plugins/ponytail.mjs http.span=66529 role=server
+timestamp=2026-10-31T17:07:27.127Z level=INFO run=b5f69838 message="spawning process" command=/bin/bash args="[\"-c\",\"ls ~/.cache/opencode 2>/dev/null; echo \\\"---\\\"; find ~/.cache/opencode ~/.local/share/opencode -maxdepth 4 -name \\\"*ponytail*\\\" 2>/dev/null | head -20\"]" cwd=/home/runner/h-dashboard http.span=68918 role=server
+timestamp=2026-10-31T17:07:27.517Z level=INFO run=19170232 msg="loading plugin" id=@dietrichgebert/ponytail entrypoint=file:///home/runner/.cache/opencode/npm/@dietrichgebert/ponytail@latest/1793466444398/node_modules/@dietrichgebert/ponytail/.opencode/plugins/ponytail.mjs http.span=142 role=server
+--- config json valid ---
+OK

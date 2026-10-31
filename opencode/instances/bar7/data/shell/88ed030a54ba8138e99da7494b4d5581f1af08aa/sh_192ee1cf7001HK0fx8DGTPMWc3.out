@@ -1,0 +1,104 @@
+opencode v2.2.5
+---
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "model": "opencode/deepseek-v4.1-flash-free",
+  "mcp": {
+    "laravel-boost": {
+      "type": "local",
+      "command": [
+        "bash",
+        "-c",
+        "cd /home/runner/h-dashboard && exec php artisan boost:mcp"
+      ],
+      "enabled": true,
+      "timeout": 30000
+    },
+    "github": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "environment": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "enabled": true,
+      "timeout": 120000
+    },
+    "codegraph": {
+      "type": "local",
+      "command": [
+        "codegraph",
+        "serve",
+        "--mcp"
+      ],
+      "enabled": true,
+      "timeout": 30000
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+      "timeout": 30000
+    },
+    "codebase-memory-mcp": {
+      "type": "local",
+      "command": [
+        "/home/runner/.local/bin/codebase-memory-mcp"
+      ],
+      "enabled": true,
+      "timeout": 60000
+    }
+  },
+  "plugins": [
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "oh-my-opencode-slim"
+  ],
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ]
+--- project ---
+.
+..
+.agents
+.codegraph
+.editorconfig
+.env
+.env-example-github
+.env.e2e.example
+.env.example
+.env.example.mysql
+.env.example.pgsql
+.env.testing
+.git
+.gitattributes
+.githooks
+.github
+.gitignore
+.mcp.json
+.pint.json
+.scratch
+AGENTS.md
+Pest.php
+README.md
+app
+artisan
+boost.json
+bootstrap
+composer.json
+composer.lock
+config
+database
+docker-compose-pgsql-.yml
+docker-compose-pgsql-mysql.yml
+docs
+install-guid.md
+lang
+laravel-log-tail.bat
+node_modules
+package-lock.json
+package.json
+--- proj config ---
