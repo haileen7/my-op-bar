@@ -1,0 +1,13 @@
+specs: 52
+376:            User::create([
+382:            $user->roles()->sync($this->role_ids);
+384:            $user->units()->sync($this->unit_ids);
+410:            // `units()->sync()` below is a full REPLACE, so the target's
+464:            $user->roles()->sync($this->role_ids);
+466:            $user->units()->sync($this->unit_ids);
+--- maintenance guard ---
+92:        // Issue #533: idempotency guard — skip if an open ticket already exists
+98:        $existingTicket = Ticket::where('unit_id', $schedule->unit_id)
+104:        if ($existingTicket) {
+--- clean lines ---
+grep: app/Console/Commands/CleanNotificationsJob.php: No such file or directory
